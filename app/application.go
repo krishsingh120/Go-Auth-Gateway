@@ -14,6 +14,20 @@ type Application struct {
 	Config Config
 }
 
+// constructor for creating newConfig
+func NewConfig(addr string) Config {
+	return Config{
+		Addr: addr,
+	}
+}
+
+// constructor for creating newApplication
+func NewApplication(cfg Config) Application {
+	return Application{
+		Config: cfg,
+	}
+}
+
 func (app *Application) Run() error {
 
 	server := &http.Server{
@@ -24,7 +38,7 @@ func (app *Application) Run() error {
 	}
 
 	fmt.Println("Server is listening!")
-	fmt.Println("Listening PORT is",app.Config.Addr)
+	fmt.Println("Listening PORT is", app.Config.Addr)
 
 	return server.ListenAndServe()
 }

@@ -8,13 +8,9 @@ import (
 func main() {
 	fmt.Println("Hello World!")
 
-	cfg := app.Config{
-		Addr: ":5000",
-	}
+	cfg := app.NewConfig(":8080")
 
-	app := app.Application{
-		Config: cfg,
-	}
+	app := app.NewApplication(cfg)
 
 	err := app.Run()
 	if err != nil {
