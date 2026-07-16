@@ -2,6 +2,7 @@ package app
 
 import (
 	config "GoAuthGateway/config/env"
+	"GoAuthGateway/router"
 	"fmt"
 	"net/http"
 	"time"
@@ -35,7 +36,7 @@ func (app *Application) Run() error {
 
 	server := &http.Server{
 		Addr:         app.Config.Addr,
-		Handler:      nil,              // TODO: Setup chi router and put it here
+		Handler:      router.SetUpRouter(),
 		ReadTimeout:  10 * time.Second, // Set read timeout to 10 sec
 		WriteTimeout: 10 * time.Second, // Set write timeout to 10 sec
 	}
