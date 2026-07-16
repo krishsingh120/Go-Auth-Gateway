@@ -1,6 +1,7 @@
 package app
 
 import (
+	config "GoAuthGateway/config/env"
 	"fmt"
 	"net/http"
 	"time"
@@ -15,15 +16,17 @@ type Application struct {
 }
 
 // constructor for creating newConfig
-func NewConfig(addr string) Config {
+func NewConfig() Config {
+	port := config.GetString("PORT", ":8080")
+
 	return Config{
-		Addr: addr,
+		Addr: port,
 	}
 }
 
 // constructor for creating newApplication
-func NewApplication(cfg Config) Application {
-	return Application{
+func NewApplication(cfg Config) *Application {
+	return &Application{
 		Config: cfg,
 	}
 }
@@ -37,7 +40,7 @@ func (app *Application) Run() error {
 		WriteTimeout: 10 * time.Second, // Set write timeout to 10 sec
 	}
 
-	fmt.Println("Server is listening!")
+	fmt.Println("🚀 Server is listening!")
 	fmt.Println("Listening PORT is", app.Config.Addr)
 
 	return server.ListenAndServe()

@@ -2,18 +2,20 @@ package main
 
 import (
 	"GoAuthGateway/app"
+	config "GoAuthGateway/config/env"
 	"fmt"
+	"log"
 )
 
 func main() {
+	config.LoadEnv()
 	fmt.Println("Hello World!")
 
-	cfg := app.NewConfig(":8080")
+	cfg := app.NewConfig()
+	application := app.NewApplication(cfg)
 
-	app := app.NewApplication(cfg)
-
-	err := app.Run()
+	err := application.Run()
 	if err != nil {
-		panic(err)
+		log.Fatalf("Error during server crash: %v", err)
 	}
 }
