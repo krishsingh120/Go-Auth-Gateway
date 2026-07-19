@@ -2,3 +2,8 @@
 2. Routing Lib -> chi router
 3. dotenv Lib for go
 4. Gin is high-performance light weight http web framework
+5. Dependency Injection Lib/frameworks in go.
+6. Go Mysql driver use to connect any RDBMS Databases.
+7. ORM's are good for simpler projects, but for very complex query still use RAW queries ot of time.
+
+> https://medium.com/@rosgluk/dependency-injection-in-go-patterns-best-practices-5e5136df5357

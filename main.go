@@ -2,17 +2,19 @@ package main
 
 import (
 	"GoAuthGateway/app"
-	config "GoAuthGateway/config/env"
+	dbConfig "GoAuthGateway/config/db"
+	envConfig "GoAuthGateway/config/env"
 	"fmt"
 	"log"
 )
 
 func main() {
-	config.LoadEnv()
+	envConfig.LoadEnv()
 	fmt.Println("Hello World!")
 
 	cfg := app.NewConfig()
 	application := app.NewApplication(cfg)
+	dbConfig.SetUpDB()
 
 	err := application.Run()
 	if err != nil {
