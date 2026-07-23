@@ -1,9 +1,10 @@
 package app
 
 import (
+	dbConfig "GoAuthGateway/config/db"
 	config "GoAuthGateway/config/env"
 	"GoAuthGateway/controllers"
-	db "GoAuthGateway/db/repositories"
+	repo "GoAuthGateway/db/repositories"
 	"GoAuthGateway/router"
 	"GoAuthGateway/services"
 	"fmt"
@@ -17,7 +18,7 @@ type Config struct {
 
 type Application struct {
 	Config Config
-	Store  db.Storage
+	Store  repo.Storage
 }
 
 // constructor for creating newConfig
@@ -33,13 +34,20 @@ func NewConfig() Config {
 func NewApplication(cfg Config) *Application {
 	return &Application{
 		Config: cfg,
-		Store:  *db.NewStorage(),
+		Store:  *repo.NewStorage(),
 	}
 }
 
 func (app *Application) Run() error {
 
-	ur := db.NewUserRepository()
+	db, err := dbConfig.SetUpDB()
+
+	if err != nil {
+		fmt.Println("Error Setting up databases", err)
+		return err
+	}
+
+	ur := repo.NewUserRepository(db)
 	us := services.NewUserService(ur)
 	uc := controllers.NewUserController(us)
 	uRouter := router.NewUserRouter(uc)

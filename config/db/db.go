@@ -20,7 +20,7 @@ func SetUpDB() (*sql.DB, error) {
 	cfg.Addr = env.GetString("DB_ADDR", "127.0.0.1:3306")
 	cfg.Net = env.GetString("DB_NET", "tcp")
 
-	fmt.Print("Connecting to Database: ", cfg.DBName, " ", cfg.FormatDSN())
+	fmt.Println("Connecting to Database: ", cfg.DBName, " ", cfg.FormatDSN())
 
 	db, err := sql.Open("mysql", cfg.FormatDSN())
 	if err != nil {

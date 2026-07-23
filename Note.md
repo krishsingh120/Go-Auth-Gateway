@@ -5,5 +5,7 @@
 5. Dependency Injection Lib/frameworks in go.
 6. Go Mysql driver use to connect any RDBMS Databases.
 7. ORM's are good for simpler projects, but for very complex query still use RAW queries ot of time.
+8. DB Migration tool in Go is Goose Lib.
 
 > https://medium.com/@rosgluk/dependency-injection-in-go-patterns-best-practices-5e5136df5357
+> https://hemanth101.medium.com/database-migrations-in-go-a-beginners-guide-to-goose-and-postgresql-0663de57aa7d
